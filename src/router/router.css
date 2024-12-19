@@ -1,0 +1,51 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  color: #fff;
+  z-index: 1;
+  transition: width 0.3s ease;
+}
+
+.sidebar {
+  height: 100vh;
+  overflow-y: auto;
+  width: 200px;
+  background-color: #333;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  background-color: #444;
+}
+
+.main-content {
+  margin-left: 100px;
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 60px;
+}
+
+.sidebar-wrapper .sidebar-header h4 {
+  padding: 20px;
+  font-size: 1.5em;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+.nav-link:hover {
+  background-color: #555;
+}
