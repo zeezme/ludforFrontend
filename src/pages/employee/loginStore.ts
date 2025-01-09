@@ -1,32 +1,32 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface LoginState {
+interface EmployeeState {
   username: string
   password: string
   email: string
   permissions: string[]
 }
 
-const initialState: LoginState = {
+const initialState: EmployeeState = {
   username: "",
   password: "",
   email: "",
   permissions: [],
 }
 
-const loginSlice = createSlice({
-  name: "login",
+const employeeSlice = createSlice({
+  name: "employee",
   initialState,
   reducers: {
-    setFieldValue<T extends keyof LoginState>(
-      state: LoginState,
-      action: PayloadAction<{ field: T; value: LoginState[T] }>
+    setFieldValue<T extends keyof EmployeeState>(
+      state: EmployeeState,
+      action: PayloadAction<{ field: T; value: EmployeeState[T] }>
     ) {
       const { field, value } = action.payload
       state[field] = value
     },
 
-    setState(_state, action: PayloadAction<LoginState>) {
+    setState(_state, action: PayloadAction<EmployeeState>) {
       return { ...action.payload }
     },
 
@@ -36,5 +36,5 @@ const loginSlice = createSlice({
   },
 })
 
-export const { setFieldValue, clearState, setState } = loginSlice.actions
-export default loginSlice.reducer
+export const { setFieldValue, clearState, setState } = employeeSlice.actions
+export default employeeSlice.reducer

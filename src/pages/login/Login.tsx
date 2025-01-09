@@ -28,7 +28,7 @@ export const Login = () => {
 
   const dispatch = useDispatch()
 
-  const mavigate = useNavigate()
+  const navigate = useNavigate()
 
   const [showModal, setShowModal] = useState(false)
 
@@ -46,7 +46,7 @@ export const Login = () => {
     })
 
     if (apiResponse === false) {
-      showToast.error("Invalid username or password")
+      showToast.error("Nome de usuário ou senha incorretos!")
       loading.stop()
       return
     }
@@ -54,10 +54,10 @@ export const Login = () => {
     dispatch(setToken((apiResponse?.data as any).token))
     dispatch(setPermissions((apiResponse?.data as any).permissions))
 
-    showToast.success("Successfully logged in")
+    showToast.success("Sucesso no login!")
     loading.stop()
 
-    mavigate("/employee")
+    navigate("/employee")
   }
 
   const handleSubmitCreateAccount = async () => {
@@ -77,9 +77,16 @@ export const Login = () => {
       return
     }
 
-    showToast.success("Account created successfully")
+    dispatch(setToken((apiResponse?.data as any).token))
+    dispatch(setPermissions((apiResponse?.data as any).permissions))
+
+    showToast.success("Usuário criado com sucesso!")
+
     loading.stop()
+
     toggleModal()
+
+    navigate("/employee")
   }
 
   return (

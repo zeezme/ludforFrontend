@@ -11,6 +11,13 @@ export interface Route {
 
 export const routes: Route[] = [
   {
+    title: "Home",
+    route: "/",
+    component: <Employee />,
+    necessaryPermissions: ["employee_read"],
+    icon: <FaUser />,
+  },
+  {
     title: "Funcionário",
     route: "/employee",
     component: <Employee />,
