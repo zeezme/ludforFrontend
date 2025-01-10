@@ -20,7 +20,7 @@ import showToast from "../../common/helpers/showToast"
 import loading from "../../common/helpers/loading"
 import DefaultInputPassword from "../../common/components/inputs/DefaultInputPassword"
 import DefaultInputEmail from "../../common/components/inputs/DefaultInputEmail"
-import { setPermissions, setToken } from "../../config/globalStore"
+import { setPermissions, setToken, setUsername } from "../../config/globalStore"
 import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
@@ -53,6 +53,7 @@ export const Login = () => {
 
     dispatch(setToken((apiResponse?.data as any).token))
     dispatch(setPermissions((apiResponse?.data as any).permissions))
+    dispatch(setUsername((apiResponse?.data as any).username))
 
     showToast.success("Sucesso no login!")
     loading.stop()

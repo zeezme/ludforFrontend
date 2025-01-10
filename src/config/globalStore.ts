@@ -4,6 +4,7 @@ interface GlobalState {
   token: string | null
   permissions: string[]
   loading: boolean
+  username: string
   toasts: {
     message: string
     type: string
@@ -15,6 +16,7 @@ const initialState: GlobalState = {
   token: null,
   permissions: [],
   loading: false,
+  username: "",
   toasts: [],
 }
 
@@ -32,6 +34,9 @@ const globalSlice = createSlice({
     },
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload
+    },
+    setUsername(state, action: PayloadAction<string>) {
+      state.username = action.payload
     },
     addToast(state, action: PayloadAction<{ message: string; type: string }>) {
       const newToast = {
@@ -56,6 +61,7 @@ const globalSlice = createSlice({
 export const {
   setToken,
   setPermissions,
+  setUsername,
   setLoading,
   removeToast,
   addToast,

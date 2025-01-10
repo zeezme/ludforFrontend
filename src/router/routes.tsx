@@ -1,5 +1,7 @@
-import { FaUser, FaHome } from "react-icons/fa"
+import { FaHome } from "react-icons/fa"
+import { FaUserCircle } from "react-icons/fa"
 import { Employee } from "../pages/employee/Employee"
+import { FaPerson } from "react-icons/fa6"
 
 export interface Route {
   title: string
@@ -15,20 +17,20 @@ export const routes: Route[] = [
     route: "/",
     component: <Employee />,
     necessaryPermissions: ["employee_read"],
-    icon: <FaUser />,
+    icon: <FaHome />,
   },
   {
     title: "Funcionário",
     route: "/employee",
     component: <Employee />,
     necessaryPermissions: ["employee_read"],
-    icon: <FaUser />,
+    icon: <FaUserCircle />,
   },
   {
     title: "Pessoa",
     route: "/person",
     component: <Employee />,
     necessaryPermissions: ["person_read"],
-    icon: <FaHome />,
+    icon: <FaPerson />,
   },
 ]

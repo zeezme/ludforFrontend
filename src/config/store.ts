@@ -7,7 +7,7 @@ import loginReducer from "../pages/login/loginStore"
 const persistConfig = {
   key: "global",
   storage,
-  whitelist: ["token", "permissions", "loading", "toasts"],
+  whitelist: ["token", "permissions", "loading", "toasts", "username"],
   serialize: true,
 }
 
