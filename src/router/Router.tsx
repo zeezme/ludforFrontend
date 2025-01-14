@@ -1,39 +1,48 @@
 import "./router.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { routes } from "./routes"
-import { Login } from "../pages/login/Login"
-import AuthGuard from "../common/guards/AuthGuard"
+import { Suspense } from "react"
 import PermissionsGuard from "../common/guards/PermissionGuard"
-import NotFound from "../common/components/NotFound"
-import Unauthorized from "../common/components/Unauthorized"
+import { AuthGuard } from "../common/guards/AuthGuard"
+import LoadingProvider from "../common/components/loading/Loading"
+import UnauthorizedPage from "../common/components/Unauthorized"
+import NotFoundPage from "../common/components/NotFound"
+import Login from "../pages/login/Login"
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+      <Suspense fallback={<LoadingProvider />}>
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-        <Route element={<AuthGuard />}>
-          {routes.map((route) => (
-            <Route
-              key={route.route}
-              path={route.route}
-              element={
-                <PermissionsGuard
-                  requiredPermissions={route.necessaryPermissions || []}
-                >
-                  {route.component}
-                </PermissionsGuard>
-              }
-            />
-          ))}
-        </Route>
+          <Route element={<AuthGuard />}>
+            {routes.map((route) => {
+              return (
+                <Route
+                  key={route.route}
+                  path={route.route}
+                  element={
+                    <PermissionsGuard
+                      requiredPermissions={route.necessaryPermissions || []}
+                    >
+                      <Suspense fallback={<LoadingProvider />}>
+                        <route.component />
+                      </Suspense>
+                    </PermissionsGuard>
+                  }
+                />
+              )
+            })}
+          </Route>
 
-        <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }
 
 export default AppRouter
+

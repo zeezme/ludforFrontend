@@ -2,16 +2,16 @@ import { Fragment } from "react/jsx-runtime"
 import { Container } from "reactstrap"
 import Listing from "../../common/components/listing/Listing"
 
-const Employee = () => {
+const Person = () => {
   return (
     <Fragment>
       <Container>
         <Listing
-          title="Funcionários"
-          apiEndPoint="employee"
+          title="Pessoas"
+          apiEndPoint="person"
           fields={{
-            "person.name": "Nome",
-            "person.email": "Email",
+            name: "Nome",
+            email: "Email",
           }}
         />
       </Container>
@@ -19,4 +19,5 @@ const Employee = () => {
   )
 }
 
-export default Employee
+export default Person
+

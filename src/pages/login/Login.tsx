@@ -23,7 +23,7 @@ import DefaultInputEmail from "../../common/components/inputs/DefaultInputEmail"
 import { setPermissions, setToken, setUsername } from "../../config/globalStore"
 import { useNavigate } from "react-router-dom"
 
-export const Login = () => {
+const Login = () => {
   const loginState = useSelector((state: RootState) => state.login)
 
   const dispatch = useDispatch()
@@ -51,9 +51,9 @@ export const Login = () => {
       return
     }
 
-    dispatch(setToken((apiResponse?.data as any).token))
-    dispatch(setPermissions((apiResponse?.data as any).permissions))
-    dispatch(setUsername((apiResponse?.data as any).username))
+    dispatch(setToken(apiResponse?.data.token))
+    dispatch(setPermissions(apiResponse?.data.permissions))
+    dispatch(setUsername(apiResponse?.data.username))
 
     showToast.success("Sucesso no login!")
     loading.stop()
@@ -194,3 +194,5 @@ export const Login = () => {
     </Fragment>
   )
 }
+
+export default Login

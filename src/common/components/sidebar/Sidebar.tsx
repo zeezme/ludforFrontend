@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
   }
 
   return (
-    <div className="app-layout">
+    <div>
       <div
         className={`sidebar ${isHovered ? "expanded" : "collapsed"}`}
         onMouseEnter={() => setIsHovered(true)}
@@ -101,3 +101,4 @@ const Sidebar: React.FC = () => {
 }
 
 export default Sidebar
+

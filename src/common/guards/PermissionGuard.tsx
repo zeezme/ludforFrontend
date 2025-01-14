@@ -16,7 +16,7 @@ const PermissionsGuard = ({
   )
   const location = useLocation()
 
-  if (location.pathname === "/login") {
+  if (location.pathname === "/login" || !requiredPermissions.length) {
     return <>{children}</>
   }
 
@@ -32,3 +32,4 @@ const PermissionsGuard = ({
 }
 
 export default PermissionsGuard
+

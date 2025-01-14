@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios"
+import { store } from "../../config/store"
 
 interface ApiParams {
   endpoint: string
@@ -6,20 +7,31 @@ interface ApiParams {
   data?: object
   params?: object
   headers?: object
+  useAuthToken?: boolean
 }
 
-const api = async <T>({
+const api = async ({
   endpoint,
   method = "GET",
   data = {},
   params = {},
   headers = {},
-}: ApiParams): Promise<AxiosResponse<T> | false> => {
+  useAuthToken = false,
+}: ApiParams): Promise<AxiosResponse<any> | false> => {
   try {
+    const token = store.getState().global.token
+
     const apiUrl = import.meta.env.VITE_API_URL
 
     if (!apiUrl) {
       throw new Error("API URL is not defined")
+    }
+
+    if (useAuthToken) {
+      headers = {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      }
     }
 
     const config: AxiosRequestConfig = {
@@ -39,3 +51,4 @@ const api = async <T>({
 }
 
 export default api
+
